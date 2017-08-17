@@ -85,7 +85,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 user.countOfResipe = user.resipe.count
             }
         } catch let error {
-            print(error)
+            fatalError("\(error)")
         }
         let jsonConverter = JSONService()
         jsonConverter.putJSONToServer(user: user)
@@ -99,7 +99,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                             .filter("userName = '\(userName)'"))
                 }
             } catch let error {
-                print(error)
+                fatalError("\(error)")
             }
 
             jsonConverter.deleteJSONFromServer(user: user)
@@ -129,7 +129,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                     currentRecipe.setRecipeImage(resipeImage.image!)
                 }
             } catch let error {
-                print(error)
+                fatalError("\(error)")
             }
             let jsonConverter = JSONService()
             guard let user = self.query.doQueryToUserInRealm()
@@ -183,7 +183,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 }
             }
         } catch let error {
-            print(error)
+            fatalError("\(error)")
         }
     }
 

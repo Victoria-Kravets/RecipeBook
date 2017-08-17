@@ -31,10 +31,10 @@ class JSONService {
                                 }
                             }
                         } catch let error as NSError {
-                            print(error)
+                            fatalError("\(error)")
                         }
                     case .failure(let error):
-                        print(error)
+                        fatalError("\(error)")
                     }
             }
         }
@@ -58,12 +58,12 @@ class JSONService {
                                 _ = responseJSON.result.value
                                 fulfill("Successully deleted")
                             case .failure(let error):
-                                print(error)
+                                fatalError("\(error)")
                         }
                     }
                 }
             } catch let error {
-                print(error)
+                fatalError("\(error)")
             }
         }
     }
