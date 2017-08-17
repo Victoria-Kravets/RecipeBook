@@ -71,20 +71,19 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     }
     
     func deleteRecipe(recipe: Resipe){
-        let object = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
-        let userName = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
-        let user = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!
+        let object = QueryToRealm.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
+        let userName = QueryToRealm.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
+        let user = QueryToRealm.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!
         try! realm.write {
             self.realm.delete(object)
             user.countOfResipe = user.resipe.count
         }
-        let jsonConverter = JSONService()
-        jsonConverter.putJSONToServer(user: user)
-        if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!.resipe.count == 0 {
+        JSONService.putJSONToServer(user: user)
+        if QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'").first!.resipe.count == 0 {
             try! realm.write {
-                self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
+                self.realm.delete(QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'"))
             }
-            jsonConverter.deleteJSONFromServer(user: user)
+            JSONService.deleteJSONFromServer(user: user)
         }
         
     }
@@ -94,7 +93,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        let currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
+        let currentRecipe: Resipe? = QueryToRealm.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
         
             if userName != recipe.creater.first!.userName{
                 deleteRecipe(recipe: recipe)
@@ -107,9 +106,8 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                     currentRecipe?.steps = steps
                     currentRecipe?.setRecipeImage(resipeImage.image!)
                 }
-                let jsonConverter = JSONService()
-                let user = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!
-                jsonConverter.putJSONToServer(user: user)
+                let user = QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'").first!
+                JSONService.putJSONToServer(user: user)
             }
             
         
@@ -121,9 +119,13 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
+        var isUserInDB = QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'").first
         try! realm.write(){
-            newResipe.id = self.query.doQueryToRecipeInRealm().last!.id + 1
+            if let last = QueryToRealm.doQueryToRecipeInRealm().last {
+                newResipe.id = last.id + 1
+            } else {
+                newResipe.id = 1
+            }
             newResipe.title = title
             newResipe.ingredience = ingredients
             newResipe.steps = steps
@@ -132,17 +134,17 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             let jsonConverter = JSONService()
             if isUserInDB != nil {
                 addRecipeToUser(newResipe: newResipe, isUserInDB: isUserInDB!).then{user in
-                    jsonConverter.putJSONToServer(user: user)
+                    JSONService.putJSONToServer(user: user)
                     }
                 
             }else{
                 isUserInDB = User(name: userName)
                 self.realm.add(isUserInDB!)
-                let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
+                let user = QueryToRealm.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
                 
                 
                 addRecipeToUser(newResipe: newResipe, isUserInDB: user!).then{ user in
-                    jsonConverter.postJSONToServer(user: user)
+                    JSONService.postJSONToServer(user: user)
                     }.then{_ in
                         print("User added to server DB")
                 }

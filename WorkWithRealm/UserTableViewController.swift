@@ -12,13 +12,12 @@ class UserTableViewController: UITableViewController {
     
     let realm = try! Realm()
     var user: User!
-    let query = QueryToRealm()
     var arrayOfChefs = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         var count = 0
-        let users = self.query.doQueryToUserInRealm()
+        let users = QueryToRealm.doQueryToUserInRealm()
         for user in users{
             
             if arrayOfChefs.count != 0{
@@ -63,7 +62,7 @@ class UserTableViewController: UITableViewController {
         
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first
+        user = QueryToRealm.doQueryToRecipeInRealm()[indexPath.row].creater.first
         return indexPath
     }
     
