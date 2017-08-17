@@ -95,7 +95,8 @@ class MyTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "ResipeCell", for: indexPath) as? ResipeTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ResipeCell",
+                                                    for: indexPath) as? ResipeTableViewCell {
             let resipe = resipes[indexPath.row]
             cell.configureCell(resipe: resipe)
             return cell

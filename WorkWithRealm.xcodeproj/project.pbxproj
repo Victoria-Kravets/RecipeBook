@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		752120011F422D6B00BB96AD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752120001F422D6B00BB96AD /* Alamofire.framework */; };
 		7523CE8C1F2B9C2C005E41C8 /* ResipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */; };
 		7523CE901F2BA3F7005E41C8 /* CreatingResipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */; };
 		7523CE921F2BC7F0005E41C8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */; };
@@ -30,8 +29,13 @@
 		75C607AB1F31FAEB00A3FB5D /* QueryToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */; };
 		9A2EAC801F459BCC0005822D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752120001F422D6B00BB96AD /* Alamofire.framework */; };
 		9A2EAC811F459BCC0005822D /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 752120001F422D6B00BB96AD /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9A2EAC821F459BCC0005822D /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759247381F332B2F00B39ABF /* PromiseKit.framework */; };
 		9A2EAC831F459BCC0005822D /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 759247381F332B2F00B39ABF /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E9A2550C1F462A2600E3CC71 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A2550B1F462A2600E3CC71 /* ObjectMapper.framework */; };
+		E9A2550D1F462A2E00E3CC71 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A2550B1F462A2600E3CC71 /* ObjectMapper.framework */; };
+		E9A2550E1F462A2E00E3CC71 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9A2550B1F462A2600E3CC71 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E9A2550F1F462A5900E3CC71 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A255091F462A2200E3CC71 /* AlamofireObjectMapper.framework */; };
+		E9A255101F462A5D00E3CC71 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9A255091F462A2200E3CC71 /* AlamofireObjectMapper.framework */; };
+		E9A255111F462A5D00E3CC71 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E9A255091F462A2200E3CC71 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
 		E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
@@ -56,7 +60,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */,
+				E9A255111F462A5D00E3CC71 /* AlamofireObjectMapper.framework in Embed Frameworks */,
 				9A2EAC811F459BCC0005822D /* Alamofire.framework in Embed Frameworks */,
+				E9A2550E1F462A2E00E3CC71 /* ObjectMapper.framework in Embed Frameworks */,
 				E9A909F91F38BC7A00571267 /* RealmSwift.framework in Embed Frameworks */,
 				9A2EAC831F459BCC0005822D /* PromiseKit.framework in Embed Frameworks */,
 			);
@@ -93,6 +99,8 @@
 		75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		75B565121F3098C400F0F18F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryToRealm.swift; sourceTree = "<group>"; };
+		E9A255091F462A2200E3CC71 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
+		E9A2550B1F462A2600E3CC71 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +108,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				752120011F422D6B00BB96AD /* Alamofire.framework in Frameworks */,
+				E9A2550D1F462A2E00E3CC71 /* ObjectMapper.framework in Frameworks */,
 				E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */,
+				E9A2550F1F462A5900E3CC71 /* AlamofireObjectMapper.framework in Frameworks */,
+				E9A2550C1F462A2600E3CC71 /* ObjectMapper.framework in Frameworks */,
 				759247391F332B2F00B39ABF /* PromiseKit.framework in Frameworks */,
-				9A2EAC821F459BCC0005822D /* PromiseKit.framework in Frameworks */,
 				9A2EAC801F459BCC0005822D /* Alamofire.framework in Frameworks */,
 				E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */,
+				E9A255101F462A5D00E3CC71 /* AlamofireObjectMapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +226,8 @@
 		75B067181F2A4D5400A7D4E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9A2550B1F462A2600E3CC71 /* ObjectMapper.framework */,
+				E9A255091F462A2200E3CC71 /* AlamofireObjectMapper.framework */,
 				752120001F422D6B00BB96AD /* Alamofire.framework */,
 				759247381F332B2F00B39ABF /* PromiseKit.framework */,
 				75B067191F2A4D5600A7D4E0 /* Realm.framework */,
