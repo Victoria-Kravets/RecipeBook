@@ -10,7 +10,6 @@ import UIKit
 import RealmSwift
 
 class ResipeTableViewCell: UITableViewCell {
-    let realm = try! Realm()
     let query = QueryToRealm()
     @IBOutlet weak var resipeImage: UIImageView!
     @IBOutlet weak var resipeTitle: UILabel!

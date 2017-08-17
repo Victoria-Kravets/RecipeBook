@@ -12,21 +12,10 @@ import PromiseKit
 
 class DefaultRecipes: NSObject {
 
-    static var shared = DefaultRecipes()
-
-    var realm: Realm {
-        guard let realm = try? Realm() else {
-            fatalError("Failed to init Realm!")
-        }
-        return realm
-    }
-
     func populateDefaultResipes(recipesFromRealm: Results<Resipe>) -> Results<Resipe> {
         let query = QueryToRealm()
         var recipes = recipesFromRealm
-        guard let realm = try? Realm() else {
-            fatalError("Failed to init Realm!")
-        }
+
         if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
             let defaultResipes = [
                 ["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"],
@@ -48,19 +37,24 @@ class DefaultRecipes: NSObject {
                 newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
                 newResipe.date = Date()
                 let user = User(name: resipe[4])
-                try? realm.write {
-                    realm.add(user)
-                    guard let userInDB = query.doQueryToUserInRealm()
-                        .filter("userName = '\(user.userName)'").first else {
-                        fatalError("Can't query userInDB")
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                        realm.add(user)
+                        guard let userInDB = query.doQueryToUserInRealm()
+                            .filter("userName = '\(user.userName)'").first else {
+                            fatalError("Can't query userInDB")
+                        }
+                        addResipeToDatabase(newResipe: newResipe).then { recipe -> Void in
+                            userInDB.resipe.append(recipe)
+                            userInDB.countOfResipe = user.resipe.count
+                            }.catch { e in
+                                print(e)
+                        }
+                        count += 1
                     }
-                    addResipeToDatabase(newResipe: newResipe).then { recipe -> Void in
-                        userInDB.resipe.append(recipe)
-                        userInDB.countOfResipe = user.resipe.count
-                        }.catch { e in
-                            print(e)
-                    }
-                    count += 1
+                } catch let e {
+                        fatalError("\(e)")
                 }
 
             recipes = query.doQueryToRecipeInRealm()

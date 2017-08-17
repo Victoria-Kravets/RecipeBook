@@ -14,8 +14,6 @@ import Alamofire
 
 class MyTableViewController: UITableViewController {
 
-    let realm = try! Realm()
-
     @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     let query = QueryToRealm()
@@ -40,16 +38,20 @@ class MyTableViewController: UITableViewController {
         fillRealm()
     }
     func fillRealm() {
-        try! self.realm.write {
-            realm.deleteAll()
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+            let jsonFile = JSONService()
+            jsonFile.getJSONFromServer().then {_ in
+                self.tableView.reloadData()
+                }.catch { e in
+                    print(e)
+            }
+        } catch let error {
+            fatalError("\(error)")
         }
-        let jsonFile = JSONService()
-        jsonFile.getJSONFromServer().then {_ in
-            self.tableView.reloadData()
-            }.catch { e in
-                print(e)
-        }
-
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -86,11 +88,13 @@ class MyTableViewController: UITableViewController {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,
+                            numberOfRowsInSection section: Int) -> Int {
         return recipes.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ResipeCell", for: indexPath) as? ResipeTableViewCell {
             let resipe = resipes[indexPath.row]
             cell.configureCell(resipe: resipe)
@@ -112,21 +116,34 @@ class MyTableViewController: UITableViewController {
         return true
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCellEditingStyle,
+                            forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
 
             let userName = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
             let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!
-            try! realm.write {
-                self.realm.delete(self.recipes[indexPath.row])
-                user.countOfResipe = user.resipe.count
+            do {
+                let realm = try Realm()
+                try realm.write {
+                    realm.delete(self.recipes[indexPath.row])
+                    user.countOfResipe = user.resipe.count
+                }
+            } catch let error {
+                fatalError("\(error)")
             }
             let jsonConverter = JSONService()
             jsonConverter.putJSONToServer(user: user)
             if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
                 jsonConverter.deleteJSONFromServer(user: user)
-                try! realm.write {
-                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
+                do {
+                    let realm = try Realm()
+                    try realm.write {
+                        realm.delete(self.query.doQueryToUserInRealm()
+                            .filter("userName = '\(userName)'"))
+                    }
+                } catch let error {
+                    fatalError("\(error)")
                 }
             }
 
@@ -137,7 +154,10 @@ class MyTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetailVC"{
-            let detailController = segue.destination as! DetailViewController
+            guard let detailController = segue.destination as?
+                DetailViewController else {
+                    fatalError("Failed to get value for detailController")
+            }
             detailController.recipe = selectedResipe
         }
     }

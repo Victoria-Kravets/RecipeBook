@@ -15,7 +15,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var ingredientsLbl: UILabel!
     @IBOutlet weak var stepsLbl: UILabel!
-    var realm = try! Realm()
     var recipe = Resipe()
 
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +28,8 @@ class DetailViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRecipe"{
-            let editVC = segue.destination as! CreatingResipeViewController
+            guard let editVC = segue.destination as? CreatingResipeViewController
+                else { fatalError("Failed to ininit editVC") }
             editVC.recipe = self.recipe
 
         }

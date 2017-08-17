@@ -11,12 +11,12 @@ import  RealmSwift
 class QueryToRealm {
 
     func doQueryToUserInRealm() -> Results<User> {
-        let realm = try! Realm()
+        guard let realm = try? Realm() else { fatalError("Can not init Realm") }
         let objects = realm.objects(User.self)
         return objects
     }
     func doQueryToRecipeInRealm() -> Results<Resipe> {
-        let realm = try! Realm()
+        guard let realm = try? Realm() else { fatalError("Can not init Realm") }
         let objects = realm.objects(Resipe.self)
         return objects
     }

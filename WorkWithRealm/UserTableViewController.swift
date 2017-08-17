@@ -9,8 +9,6 @@
 import UIKit
 import RealmSwift
 class UserTableViewController: UITableViewController {
-
-    let realm = try! Realm()
     var user: User!
     let query = QueryToRealm()
     var arrayOfChefs = [User]()
@@ -68,7 +66,9 @@ class UserTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "See recipes of selected chef"{
-            let tableResipesOfOneChef = segue.destination as! MyTableViewController
+            guard let tableResipesOfOneChef = segue.destination as?
+                MyTableViewController
+                else { fatalError("Failed to get value for tableResipesOfOneChef") }
             tableResipesOfOneChef.chef = user.userName
         }
 
