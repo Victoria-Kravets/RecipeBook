@@ -23,7 +23,7 @@ class MyTableViewController: UITableViewController {
     var recipes: Results<Resipe>{
         get{
             if resipes == nil{
-                resipes = self.query.doQueryToRecipeInRealm()
+                resipes = QueryToRealm.doQueryToRecipeInRealm()
             }
             return resipes
         }
@@ -43,8 +43,7 @@ class MyTableViewController: UITableViewController {
         try! self.realm.write {
             realm.deleteAll()
         }
-        let jsonFile = JSONService()
-        jsonFile.getJSONFromServer().then {_ in
+        JSONService.getJSONFromServer().then {_ in
             self.tableView.reloadData()
         }
         
@@ -58,16 +57,16 @@ class MyTableViewController: UITableViewController {
         super.viewWillAppear(true)
        // populateDefaultResipes()
         if chef != nil{
-            recipes = self.query.doQueryToRecipeInRealm().filter("ANY creater.userName = '1'")
+            recipes = QueryToRealm.doQueryToRecipeInRealm().filter("ANY creater.userName = '1'")
         }else{
-            recipes = self.query.doQueryToRecipeInRealm()
+            recipes = QueryToRealm.doQueryToRecipeInRealm()
         }
         tableView.reloadData()
     }
     
     @IBAction func viewAllRecipes(_ sender: UIButton) {
         chef = nil
-        recipes = self.query.doQueryToRecipeInRealm()
+        recipes = QueryToRealm.doQueryToRecipeInRealm()
         tableView.reloadData()
     }
     
@@ -115,18 +114,17 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            let userName = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
-            let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!
+            let userName = QueryToRealm.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
+            let user = QueryToRealm.doQueryToRecipeInRealm()[indexPath.row].creater.first!
             try! realm.write() {
                 self.realm.delete(self.recipes[indexPath.row])
                 user.countOfResipe = user.resipe.count
             }
-            let jsonConverter = JSONService()
-            jsonConverter.putJSONToServer(user: user)
-            if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
-                jsonConverter.deleteJSONFromServer(user: user)
+            JSONService.putJSONToServer(user: user)
+            if QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
+                JSONService.deleteJSONFromServer(user: user)
                 try! realm.write() {
-                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
+                    self.realm.delete(QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'"))
                 }
             }
             
