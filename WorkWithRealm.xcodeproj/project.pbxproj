@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		752120011F422D6B00BB96AD /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752120001F422D6B00BB96AD /* Alamofire.framework */; };
-		752120041F422DAC00BB96AD /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 752120021F422DAC00BB96AD /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		752120061F430B1D00BB96AD /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752120051F430B1D00BB96AD /* AlamofireObjectMapper.framework */; };
-		752120071F430B1D00BB96AD /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 752120051F430B1D00BB96AD /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7523CE8C1F2B9C2C005E41C8 /* ResipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */; };
 		7523CE901F2BA3F7005E41C8 /* CreatingResipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */; };
 		7523CE921F2BC7F0005E41C8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */; };
@@ -20,9 +17,6 @@
 		757051C31F2B40380014B9B2 /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757051C21F2B40380014B9B2 /* MyTableViewController.swift */; };
 		757051C71F2B42B90014B9B2 /* Resipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757051C61F2B42B90014B9B2 /* Resipe.swift */; };
 		759247391F332B2F00B39ABF /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759247381F332B2F00B39ABF /* PromiseKit.framework */; };
-		7592473C1F332BC100B39ABF /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7592473A1F332BC100B39ABF /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		759AB5FD1F3D0DB400ACEEA7 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759AB5FC1F3D0DB400ACEEA7 /* ObjectMapper.framework */; };
-		759AB5FE1F3D0DB400ACEEA7 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 759AB5FC1F3D0DB400ACEEA7 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75A6CB6B1F448C09001CD524 /* DefaultRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A6CB6A1F448C09001CD524 /* DefaultRecipes.swift */; };
 		75AA68521F3DED0300DF45CB /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA68511F3DED0300DF45CB /* ListTransform.swift */; };
 		75AA68561F3DFF8100DF45CB /* ListOfUsers.json in Resources */ = {isa = PBXBuildFile; fileRef = 75AA68551F3DFF8100DF45CB /* ListOfUsers.json */; };
@@ -34,6 +28,10 @@
 		75B0670E1F2A47A600A7D4E0 /* WorkWithRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0670D1F2A47A600A7D4E0 /* WorkWithRealmTests.swift */; };
 		75B565131F3098C400F0F18F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75B565121F3098C400F0F18F /* .swiftlint.yml */; };
 		75C607AB1F31FAEB00A3FB5D /* QueryToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */; };
+		9A2EAC801F459BCC0005822D /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752120001F422D6B00BB96AD /* Alamofire.framework */; };
+		9A2EAC811F459BCC0005822D /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 752120001F422D6B00BB96AD /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9A2EAC821F459BCC0005822D /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759247381F332B2F00B39ABF /* PromiseKit.framework */; };
+		9A2EAC831F459BCC0005822D /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 759247381F332B2F00B39ABF /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
 		E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
@@ -58,11 +56,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */,
-				752120071F430B1D00BB96AD /* AlamofireObjectMapper.framework in Embed Frameworks */,
-				7592473C1F332BC100B39ABF /* PromiseKit.framework in Embed Frameworks */,
-				759AB5FE1F3D0DB400ACEEA7 /* ObjectMapper.framework in Embed Frameworks */,
-				752120041F422DAC00BB96AD /* Alamofire.framework in Embed Frameworks */,
+				9A2EAC811F459BCC0005822D /* Alamofire.framework in Embed Frameworks */,
 				E9A909F91F38BC7A00571267 /* RealmSwift.framework in Embed Frameworks */,
+				9A2EAC831F459BCC0005822D /* PromiseKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,8 +67,6 @@
 
 /* Begin PBXFileReference section */
 		752120001F422D6B00BB96AD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		752120021F422DAC00BB96AD /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		752120051F430B1D00BB96AD /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResipeTableViewCell.swift; sourceTree = "<group>"; };
 		7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatingResipeViewController.swift; sourceTree = "<group>"; };
 		7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
@@ -82,8 +76,6 @@
 		757051C21F2B40380014B9B2 /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		757051C61F2B42B90014B9B2 /* Resipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resipe.swift; sourceTree = "<group>"; };
 		759247381F332B2F00B39ABF /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
-		7592473A1F332BC100B39ABF /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
-		759AB5FC1F3D0DB400ACEEA7 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		75A6CB6A1F448C09001CD524 /* DefaultRecipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRecipes.swift; sourceTree = "<group>"; };
 		75AA68511F3DED0300DF45CB /* ListTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransform.swift; sourceTree = "<group>"; };
 		75AA68551F3DFF8100DF45CB /* ListOfUsers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListOfUsers.json; sourceTree = "<group>"; };
@@ -109,11 +101,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				752120011F422D6B00BB96AD /* Alamofire.framework in Frameworks */,
-				752120061F430B1D00BB96AD /* AlamofireObjectMapper.framework in Frameworks */,
 				E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */,
 				759247391F332B2F00B39ABF /* PromiseKit.framework in Frameworks */,
+				9A2EAC821F459BCC0005822D /* PromiseKit.framework in Frameworks */,
+				9A2EAC801F459BCC0005822D /* Alamofire.framework in Frameworks */,
 				E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */,
-				759AB5FD1F3D0DB400ACEEA7 /* ObjectMapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,11 +174,7 @@
 		75B066EC1F2A47A500A7D4E0 = {
 			isa = PBXGroup;
 			children = (
-				752120051F430B1D00BB96AD /* AlamofireObjectMapper.framework */,
-				752120021F422DAC00BB96AD /* Alamofire.framework */,
 				75AA68551F3DFF8100DF45CB /* ListOfUsers.json */,
-				759AB5FC1F3D0DB400ACEEA7 /* ObjectMapper.framework */,
-				7592473A1F332BC100B39ABF /* PromiseKit.framework */,
 				75B565121F3098C400F0F18F /* .swiftlint.yml */,
 				75B066F71F2A47A500A7D4E0 /* WorkWithRealm */,
 				75B0670C1F2A47A600A7D4E0 /* WorkWithRealmTests */,
@@ -248,6 +236,7 @@
 				75B066F31F2A47A500A7D4E0 /* Resources */,
 				75B0671D1F2A4D6E00A7D4E0 /* Run Script */,
 				7592473D1F332BC100B39ABF /* Embed Frameworks */,
+				9A2EAC841F459C130005822D /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -356,6 +345,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		9A2EAC841F459C130005822D /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

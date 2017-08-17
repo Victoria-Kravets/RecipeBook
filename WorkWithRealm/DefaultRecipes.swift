@@ -10,19 +10,25 @@ import Foundation
 import RealmSwift
 import PromiseKit
 
-class DefaultRecipes{
-    
-    let realm = try! Realm()
-    
+class DefaultRecipes: NSObject {
+
     func populateDefaultResipes(recipesFromRealm: Results<Resipe>) -> Results<Resipe> {
         let query = QueryToRealm()
         var recipes = recipesFromRealm
+        guard let realm = try? Realm() else {
+            fatalError("Failed to init Realm!")
+        }
         if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
-            
-            let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
+            let defaultResipes = [
+                ["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"],
+                ["Pizza", "1", "1", "pizza.jpeg", "Nikky Rush"],
+                ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"],
+                ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"],
+                ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]
+            ] // creating default names of categories
             var count = 0
-            for resipe in defaultResipes { // creating new instance for each recipe, fill properties adn adding object to realm
-                
+            for resipe in defaultResipes {
+                // creating new instance for each recipe, fill properties adn adding object to realm
                 let newResipe = Resipe()
                 newResipe.id = count
                 newResipe.title = resipe[0]
@@ -33,14 +39,19 @@ class DefaultRecipes{
                 newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
                 newResipe.date = Date()
                 let user = User(name: resipe[4])
-                
-                try! realm.write {
-                    realm.add(user)
-                    let userInDB = query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
-                    addResipeToDatabase(newResipe: newResipe).then{ recipe in
-                        userInDB?.resipe.append(recipe)
+                do {
+                    try realm.write {
+                        realm.add(user)
+                        guard let userInDB = query.doQueryToUserInRealm()
+                            .filter("userName = '\(user.userName)'").first else {
+                            fatalError("Can't query userInDB")
                         }
-                    userInDB?.countOfResipe = user.resipe.count
+                        addResipeToDatabase(newResipe: newResipe).then { recipe in
+                        userInDB.resipe.append(recipe)
+                        userInDB.countOfResipe = user.resipe.count
+                    }
+                }.catch let e {
+                    print(e)
                 }
                 count += 1
             }
@@ -50,6 +61,9 @@ class DefaultRecipes{
         return recipes
     }
         func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
+            guard let realm = try? Realm() else {
+                fatalError("Failed to init Realm!")
+            }
             return Promise { fulfill, reject in
                 try! realm.write(){
                     realm.add(newResipe)

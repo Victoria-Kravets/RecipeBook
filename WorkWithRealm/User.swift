@@ -32,9 +32,9 @@ class User: Object, Mappable {
         self.init()
     }
     func mapping(map: Map) {
-        userName <- map["userName"]
-        id <- map["id"]
-        resipe <- (map["resipe"], ListTransform<Resipe>())
+        userName      <- map["userName"]
+        id            <- map["id"]
+        resipe        <- (map["resipe"], ListTransform<Resipe>())
         countOfResipe <- map["countOfResipe"]
     }
     
