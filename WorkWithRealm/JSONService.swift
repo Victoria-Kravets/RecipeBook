@@ -13,12 +13,12 @@ import Alamofire
 import AlamofireObjectMapper
 import PromiseKit
 
-class JSONService{
+class JSONService {
     let realm = try! Realm()
-   
-    func getJSONFromServer() -> Promise<String>{
-        
-        return Promise<String> { fulfill, reject in
+
+    func getJSONFromServer() -> Promise<String> {
+
+        return Promise<String> { fulfill, _ in
             let url = "http://localhost:3000/users"
             Alamofire.request(url)
                 .responseArray { (response: DataResponse<[User]>) in
@@ -40,17 +40,17 @@ class JSONService{
                     }
             }
         }
-        
+
     }
-    func deleteJSONFromServer(user: User) -> Promise<String>{
-        
-        return Promise<String>{ fulfill, reject in
+    @discardableResult func deleteJSONFromServer(user: User) -> Promise<String> {
+
+        return Promise<String> { fulfill, _ in
             let url = "http://localhost:3000/users/\(user.id)"
             let realm = try! Realm()
-            try! realm.write{
+            try! realm.write {
                 let jsonUser = user.toJSON()
                 request(url, method: .delete, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
-                    
+
                     switch responseJSON.result {
                     case .success(let value):
                         let jsonObject = responseJSON.result.value
@@ -62,14 +62,14 @@ class JSONService{
             }
         }
     }
-    func putJSONToServer(user: User) -> Promise<String>{
-        
-        return Promise<String>{ fulfill, reject in
+    @discardableResult func putJSONToServer(user: User) -> Promise<String> {
+
+        return Promise<String> { fulfill, _ in
             let url = "http://localhost:3000/users/\(user.id)"
-            try! realm.write{
+            try! realm.write {
                 let jsonUser = user.toJSON()
                 request(url, method: .put, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
-                    
+
                     switch responseJSON.result {
                     case .success(let value):
                         let jsonObject = responseJSON.result.value
@@ -82,22 +82,22 @@ class JSONService{
             }
         }
     }
-    func postJSONToServer(user: User) -> Promise<String>{
-        
-        return Promise<String>{ fulfill, reject in
+    @discardableResult func postJSONToServer(user: User) -> Promise<String> {
+
+        return Promise<String> { fulfill, _ in
             let url = "http://localhost:3000/users"
             try! realm.write {
                 let jsonUser = user.toJSON()
-                request(url, method: .post, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in                    
+                request(url, method: .post, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
                     switch responseJSON.result {
                     case .success(let value):
-                        let jsonObject = responseJSON.result.value
+                        _ = responseJSON.result.value
                         fulfill("Successully added")
                     case .failure(let error):
                         print(error)
                     }
                 }
-            } 
+            }
         }
     }
 }

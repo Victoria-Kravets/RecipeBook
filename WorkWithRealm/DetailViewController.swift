@@ -9,8 +9,7 @@
 import UIKit
 import RealmSwift
 class DetailViewController: UIViewController {
-    
-    
+
     @IBOutlet weak var createrLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -18,7 +17,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var stepsLbl: UILabel!
     var realm = try! Realm()
     var recipe = Resipe()
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         titleLbl.text = recipe.title
@@ -27,13 +26,13 @@ class DetailViewController: UIViewController {
         stepsLbl.text = recipe.steps
      //   imageView.image = UIImage(data: recipe.image!)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRecipe"{
             let editVC = segue.destination as! CreatingResipeViewController
             editVC.recipe = self.recipe
-            
+
         }
     }
-    
+
 }

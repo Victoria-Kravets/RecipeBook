@@ -50,6 +50,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          See also applicationDidEnterBackground:.*/
     }
 
-
 }
-

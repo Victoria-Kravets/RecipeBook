@@ -1,6 +1,6 @@
 //
 //  CreatingResipeViewController.swift
-//  WorkWithRealm
+//  realm
 //
 //  Created by Viktoria on 7/28/17.
 //  Copyright © 2017 Viktoria. All rights reserved.
@@ -12,11 +12,10 @@ import AssetsLibrary.ALAssetsLibrary
 import PromiseKit
 
 class CreatingResipeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    let realm = try! Realm()
+
     let query = QueryToRealm()
-    var recipe: Resipe!
-    
+    var recipe: Resipe?
+
     @IBOutlet weak var createRecipeBtn: UIButton!
     @IBOutlet weak var createrOfResipe: UITextField!
     @IBOutlet weak var resipeTitle: UITextField!
@@ -27,7 +26,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePicker()
-        if recipe != nil{
+        if let recipe = recipe {
             createrOfResipe.text = recipe.creater.first?.userName
             resipeTitle.text = recipe.title
             resipeIngredients.text = recipe.ingredience
@@ -38,9 +37,9 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        
+
     }
-    func configurePicker(){
+    func configurePicker() {
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
     }
@@ -48,60 +47,61 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         present(imagePicker, animated: true, completion: nil)
     }
     @IBAction func createResipeButtonPressed(_ sender: UIButton) {
-        
+
             let title = resipeTitle.text!
             let ingredients = resipeIngredients.text!
             let steps = resipeSteps.text!
             let user = createrOfResipe.text!
-            
+
             if title != "" && ingredients != "" && steps != "" && user != "" {
-                if recipe == nil{
-                    createRecipe()
-                    self.navigationController?.popViewController(animated: true)
-                }else{
+                if let recipe = recipe {
                     editRecipe(recipe: recipe)
                     self.navigationController?.popToRootViewController(animated: true)
+                } else {
+                    createRecipe()
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
-            
+
             if title == "" || ingredients == "" || steps == "" || user == "" {
                 createAlert(title: "Warning", massage: "Please fill all textFields!")
             }
-        
+
     }
-    
-    func deleteRecipe(recipe: Resipe){
+
+    func deleteRecipe(recipe: Resipe) {
+
         let object = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
         let userName = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
         let user = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!
-        try! realm.write {
-            self.realm.delete(object)
+        try! DefaultRecipes.shared.realm.write {
+            DefaultRecipes.shared.realm.delete(object)
             user.countOfResipe = user.resipe.count
         }
         let jsonConverter = JSONService()
         jsonConverter.putJSONToServer(user: user)
         if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!.resipe.count == 0 {
-            try! realm.write {
-                self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
+            try! DefaultRecipes.shared.realm.write {
+                DefaultRecipes.shared.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
             }
             jsonConverter.deleteJSONFromServer(user: user)
         }
-        
+
     }
-    func editRecipe(recipe: Resipe){
-        
+    func editRecipe(recipe: Resipe) {
+
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
         let currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
-        
-            if userName != recipe.creater.first!.userName{
+
+            if userName != recipe.creater.first!.userName {
                 deleteRecipe(recipe: recipe)
                 createRecipe()
 
-            }else{
-                try! realm.write {
+            } else {
+                try! DefaultRecipes.shared.realm.write {
                     currentRecipe?.title = title
                     currentRecipe?.ingredience = ingredients
                     currentRecipe?.steps = steps
@@ -111,8 +111,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!
                 jsonConverter.putJSONToServer(user: user)
             }
-            
-        
+
     }
 
     func createRecipe() {
@@ -122,7 +121,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
         var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
-        try! realm.write(){
+        try! DefaultRecipes.shared.realm.write {
             newResipe.id = self.query.doQueryToRecipeInRealm().last!.id + 1
             newResipe.title = title
             newResipe.ingredience = ingredients
@@ -131,35 +130,38 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             newResipe.setRecipeImage(resipeImage.image!)
             let jsonConverter = JSONService()
             if isUserInDB != nil {
-                addRecipeToUser(newResipe: newResipe, isUserInDB: isUserInDB!).then{user in
+                addRecipeToUser(newResipe: newResipe, isUserInDB: isUserInDB!).then { user in
                     jsonConverter.putJSONToServer(user: user)
-                    }
-                
-            }else{
+                    }.catch { e in
+                        print(e)
+                }
+
+            } else {
                 isUserInDB = User(name: userName)
-                self.realm.add(isUserInDB!)
+                DefaultRecipes.shared.realm.add(isUserInDB!)
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
-                
-                
-                addRecipeToUser(newResipe: newResipe, isUserInDB: user!).then{ user in
+
+                addRecipeToUser(newResipe: newResipe, isUserInDB: user!).then { user in
                     jsonConverter.postJSONToServer(user: user)
-                    }.then{_ in
+                    }.then {_ in
                         print("User added to server DB")
+                    }.catch { e in
+                        print(e)
                 }
 
             }
         }
     }
-    
-    func addRecipeToUser(newResipe: Resipe, isUserInDB: User) -> Promise<User>{
-        return Promise<User> { fulfill, reject in
+
+    func addRecipeToUser(newResipe: Resipe, isUserInDB: User) -> Promise<User> {
+        return Promise<User> { fulfill, _ in
             isUserInDB.resipe.append(newResipe)
             isUserInDB.countOfResipe = isUserInDB.resipe.count
             fulfill(isUserInDB)
         }
-        
+
     }
-    func createAlert(title: String, massage: String){
+    func createAlert(title: String, massage: String) {
         let alert = UIAlertController(title: title, message: massage, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default))
         self.present(alert, animated: true, completion: nil)
@@ -170,10 +172,3 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         self.dismiss(animated: true, completion: nil)
     }
 }
-
-
-
-
-
-
-

@@ -8,17 +8,16 @@
 
 import Foundation
 import  RealmSwift
-class QueryToRealm{
-    
-    func doQueryToUserInRealm() -> Results<User>{
+class QueryToRealm {
+
+    func doQueryToUserInRealm() -> Results<User> {
         let realm = try! Realm()
         let objects = realm.objects(User.self)
         return objects
     }
-    func doQueryToRecipeInRealm() -> Results<Resipe>{
+    func doQueryToRecipeInRealm() -> Results<Resipe> {
         let realm = try! Realm()
         let objects = realm.objects(Resipe.self)
         return objects
     }
 }
-

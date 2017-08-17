@@ -12,6 +12,15 @@ import PromiseKit
 
 class DefaultRecipes: NSObject {
 
+    static var shared = DefaultRecipes()
+
+    var realm: Realm {
+        guard let realm = try? Realm() else {
+            fatalError("Failed to init Realm!")
+        }
+        return realm
+    }
+
     func populateDefaultResipes(recipesFromRealm: Results<Resipe>) -> Results<Resipe> {
         let query = QueryToRealm()
         var recipes = recipesFromRealm
@@ -39,37 +48,40 @@ class DefaultRecipes: NSObject {
                 newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
                 newResipe.date = Date()
                 let user = User(name: resipe[4])
-                do {
-                    try realm.write {
-                        realm.add(user)
-                        guard let userInDB = query.doQueryToUserInRealm()
-                            .filter("userName = '\(user.userName)'").first else {
-                            fatalError("Can't query userInDB")
-                        }
-                        addResipeToDatabase(newResipe: newResipe).then { recipe in
+                try? realm.write {
+                    realm.add(user)
+                    guard let userInDB = query.doQueryToUserInRealm()
+                        .filter("userName = '\(user.userName)'").first else {
+                        fatalError("Can't query userInDB")
+                    }
+                    addResipeToDatabase(newResipe: newResipe).then { recipe -> Void in
                         userInDB.resipe.append(recipe)
                         userInDB.countOfResipe = user.resipe.count
+                        }.catch { e in
+                            print(e)
                     }
-                }.catch let e {
-                    print(e)
+                    count += 1
                 }
-                count += 1
-            }
+
             recipes = query.doQueryToRecipeInRealm()
-            
+
+            }
         }
         return recipes
+
     }
-        func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
-            guard let realm = try? Realm() else {
-                fatalError("Failed to init Realm!")
-            }
+     @discardableResult func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
             return Promise { fulfill, reject in
-                try! realm.write(){
-                    realm.add(newResipe)
-                    fulfill(newResipe)
+                let realm = try Realm()
+                do {
+                    try realm.write {
+                        realm.add(newResipe, update: true)
+                    }
+                } catch (let error) {
+                    reject(error)
                 }
+                fulfill(newResipe)
             }
         }
-    
+
 }
