@@ -246,8 +246,10 @@
 				75B066F11F2A47A500A7D4E0 /* Sources */,
 				75B066F21F2A47A500A7D4E0 /* Frameworks */,
 				75B066F31F2A47A500A7D4E0 /* Resources */,
-				75B0671D1F2A4D6E00A7D4E0 /* Run Script */,
+				75B0671D1F2A4D6E00A7D4E0 /* Carthage */,
 				7592473D1F332BC100B39ABF /* Embed Frameworks */,
+				A59D102AD17A7C72611A529D /* Tailor */,
+				3596A4741F47AC5400CE08C3 /* Build Number */,
 			);
 			buildRules = (
 			);
@@ -342,7 +344,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		75B0671D1F2A4D6E00A7D4E0 /* Run Script */ = {
+		3596A4741F47AC5400CE08C3 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$SRCROOT/Scripts/set_build_number.sh\n";
+		};
+		75B0671D1F2A4D6E00A7D4E0 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -351,12 +367,26 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
 			);
-			name = "Run Script";
+			name = Carthage;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		A59D102AD17A7C72611A529D /* Tailor */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Tailor;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "if hash tailor 2>/dev/null; then\n  tailor\nelse\n  echo \"warning: Please install Tailor from https://tailor.sh\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
