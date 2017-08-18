@@ -15,7 +15,6 @@ class DefaultRecipes{
     let realm = try! Realm()
     
     func populateDefaultResipes(recipesFromRealm: Results<Resipe>) -> Results<Resipe> {
-        let query = QueryToRealm()
         var recipes = recipesFromRealm
         if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
             
@@ -36,7 +35,7 @@ class DefaultRecipes{
                 
                 try! realm.write {
                     realm.add(user)
-                    let userInDB = query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
+                    let userInDB = QueryToRealm.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
                     addResipeToDatabase(newResipe: newResipe).then{ recipe in
                         userInDB?.resipe.append(recipe)
                         }
@@ -44,7 +43,7 @@ class DefaultRecipes{
                 }
                 count += 1
             }
-            recipes = query.doQueryToRecipeInRealm()
+            recipes = QueryToRealm.doQueryToRecipeInRealm()
             
         }
         return recipes
