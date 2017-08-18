@@ -11,11 +11,11 @@ import RealmSwift
 import ObjectMapper
 
 class User: Object, Mappable {
-    dynamic var userName = ""
-    dynamic var id = 0
+    @objc dynamic var userName = ""
+    @objc dynamic var id = 0
     var resipe = List<Resipe>()
     var count = 0
-    dynamic var countOfResipe : Int{
+    @objc dynamic var countOfResipe : Int{
         get{
             count = resipe.count
             return count
