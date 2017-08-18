@@ -11,7 +11,6 @@ import RealmSwift
 import PromiseKit
 import ObjectMapper
 import Alamofire
-import SnapKit
 
 class MyTableViewController: UITableViewController {
     

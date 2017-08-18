@@ -14,8 +14,6 @@
 		7523CE8C1F2B9C2C005E41C8 /* ResipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */; };
 		7523CE901F2BA3F7005E41C8 /* CreatingResipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */; };
 		7523CE921F2BC7F0005E41C8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */; };
-		7531EDE71F4613C000BF3B97 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531EDE61F4613C000BF3B97 /* SnapKit.framework */; };
-		7531EDE81F4613C000BF3B97 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7531EDE61F4613C000BF3B97 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		753813651F2E0F38009E86F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813641F2E0F38009E86F0 /* User.swift */; };
 		753813671F2E1147009E86F0 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813661F2E1147009E86F0 /* UserTableViewController.swift */; };
 		753813691F2E1156009E86F0 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813681F2E1156009E86F0 /* UserTableViewCell.swift */; };
@@ -62,7 +60,6 @@
 				E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */,
 				752120071F430B1D00BB96AD /* AlamofireObjectMapper.framework in Embed Frameworks */,
 				7592473C1F332BC100B39ABF /* PromiseKit.framework in Embed Frameworks */,
-				7531EDE81F4613C000BF3B97 /* SnapKit.framework in Embed Frameworks */,
 				759AB5FE1F3D0DB400ACEEA7 /* ObjectMapper.framework in Embed Frameworks */,
 				752120041F422DAC00BB96AD /* Alamofire.framework in Embed Frameworks */,
 				E9A909F91F38BC7A00571267 /* RealmSwift.framework in Embed Frameworks */,
@@ -79,7 +76,6 @@
 		7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResipeTableViewCell.swift; sourceTree = "<group>"; };
 		7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatingResipeViewController.swift; sourceTree = "<group>"; };
 		7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		7531EDE61F4613C000BF3B97 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		753813641F2E0F38009E86F0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		753813661F2E1147009E86F0 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		753813681F2E1156009E86F0 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewCell.swift; path = ../UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -115,7 +111,6 @@
 				752120011F422D6B00BB96AD /* Alamofire.framework in Frameworks */,
 				752120061F430B1D00BB96AD /* AlamofireObjectMapper.framework in Frameworks */,
 				E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */,
-				7531EDE71F4613C000BF3B97 /* SnapKit.framework in Frameworks */,
 				759247391F332B2F00B39ABF /* PromiseKit.framework in Frameworks */,
 				E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */,
 				759AB5FD1F3D0DB400ACEEA7 /* ObjectMapper.framework in Frameworks */,
@@ -187,7 +182,6 @@
 		75B066EC1F2A47A500A7D4E0 = {
 			isa = PBXGroup;
 			children = (
-				7531EDE61F4613C000BF3B97 /* SnapKit.framework */,
 				752120051F430B1D00BB96AD /* AlamofireObjectMapper.framework */,
 				752120021F422DAC00BB96AD /* Alamofire.framework */,
 				75AA68551F3DFF8100DF45CB /* ListOfUsers.json */,
