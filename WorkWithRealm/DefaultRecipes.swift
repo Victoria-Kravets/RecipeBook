@@ -13,9 +13,7 @@ import PromiseKit
 class DefaultRecipes: NSObject {
 
     func populateDefaultResipes(recipesFromRealm: Results<Resipe>) -> Results<Resipe> {
-        let query = QueryToRealm()
         var recipes = recipesFromRealm
-
         if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
             let defaultResipes = [
                 ["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"],
@@ -41,7 +39,7 @@ class DefaultRecipes: NSObject {
                     let realm = try Realm()
                     try realm.write {
                         realm.add(user)
-                        guard let userInDB = query.doQueryToUserInRealm()
+                        guard let userInDB = QueryToRealm.doQueryToUserInRealm()
                             .filter("userName = '\(user.userName)'").first else {
                             fatalError("Can't query userInDB")
                         }
@@ -49,16 +47,14 @@ class DefaultRecipes: NSObject {
                             userInDB.resipe.append(recipe)
                             userInDB.countOfResipe = user.resipe.count
                             }.catch { e in
-                                print(e)
+                                fatalError("\(e)")
                         }
                         count += 1
                     }
                 } catch let e {
                         fatalError("\(e)")
                 }
-
-            recipes = query.doQueryToRecipeInRealm()
-
+            recipes = QueryToRealm.doQueryToRecipeInRealm()
             }
         }
         return recipes
@@ -77,5 +73,4 @@ class DefaultRecipes: NSObject {
                 fulfill(newResipe)
             }
         }
-
 }

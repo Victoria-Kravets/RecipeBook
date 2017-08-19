@@ -8,14 +8,16 @@
 
 import Foundation
 import  RealmSwift
+
 class QueryToRealm {
 
-    func doQueryToUserInRealm() -> Results<User> {
+    static func doQueryToUserInRealm() -> Results<User> {
         guard let realm = try? Realm() else { fatalError("Can not init Realm") }
         let objects = realm.objects(User.self)
         return objects
     }
-    func doQueryToRecipeInRealm() -> Results<Resipe> {
+
+    static func doQueryToRecipeInRealm() -> Results<Resipe> {
         guard let realm = try? Realm() else { fatalError("Can not init Realm") }
         let objects = realm.objects(Resipe.self)
         return objects

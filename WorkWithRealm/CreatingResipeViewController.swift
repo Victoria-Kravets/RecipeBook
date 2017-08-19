@@ -70,14 +70,14 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     }
 
     func deleteRecipe(recipe: Resipe) {
-        guard let userName = self.query.doQueryToRecipeInRealm()
+        guard let userName = QueryToRealm.doQueryToRecipeInRealm()
             .filter("id = \(recipe.id)").first?.creater.first?.userName,
-            let user = self.query.doQueryToRecipeInRealm()
+            let user = QueryToRealm.doQueryToRecipeInRealm()
                 .filter("id = \(recipe.id)").first?.creater.first
             else {
             fatalError("Failed to initiate some value")
         }
-        let object = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
+        let object = QueryToRealm.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
         do {
             let realm = try Realm()
             try realm.write {
@@ -87,22 +87,21 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         } catch let error {
             fatalError("\(error)")
         }
-        let jsonConverter = JSONService()
-        jsonConverter.putJSONToServer(user: user)
-        if let count = self.query.doQueryToUserInRealm()
+        JSONService.putJSONToServer(user: user)
+        if let count = QueryToRealm.doQueryToUserInRealm()
             .filter("userName = '\(userName)'").first?.resipe.count, count == 0 {
             do {
                 let realm = try Realm()
                 try realm.write {
                     realm
-                        .delete(self.query.doQueryToUserInRealm()
+                        .delete(QueryToRealm.doQueryToUserInRealm()
                             .filter("userName = '\(userName)'"))
                 }
             } catch let error {
                 fatalError("\(error)")
             }
 
-            jsonConverter.deleteJSONFromServer(user: user)
+            JSONService.deleteJSONFromServer(user: user)
         }
 
     }
@@ -112,7 +111,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        let currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
+        let currentRecipe: Resipe? = QueryToRealm.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
         if userName != recipe.creater.first!.userName {
             deleteRecipe(recipe: recipe)
             createRecipe()
@@ -131,11 +130,10 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             } catch let error {
                 fatalError("\(error)")
             }
-            let jsonConverter = JSONService()
-            guard let user = self.query.doQueryToUserInRealm()
+            guard let user = QueryToRealm.doQueryToUserInRealm()
                 .filter("userName = '\(userName)'").first
                 else { fatalError("Failed can not fetch user") }
-            jsonConverter.putJSONToServer(user: user)
+            JSONService.putJSONToServer(user: user)
         }
 
     }
@@ -146,22 +144,21 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
+        var isUserInDB = QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'").first
         do {
             let realm = try Realm()
             try realm.write {
-                newResipe.id = self.query.doQueryToRecipeInRealm().last!.id + 1
+                newResipe.id = QueryToRealm.doQueryToRecipeInRealm().last!.id + 1
                 newResipe.title = title
                 newResipe.ingredience = ingredients
                 newResipe.steps = steps
                 newResipe.date = NSDate() as Date!
                 newResipe.setRecipeImage(resipeImage.image!)
-                let jsonConverter = JSONService()
                 if isUserInDB != nil {
                     addRecipeToUser(newResipe: newResipe, isUserInDB: isUserInDB!).then { user in
-                        jsonConverter.putJSONToServer(user: user)
+                        JSONService.putJSONToServer(user: user)
                         }.catch { e in
-                            print(e)
+                            fatalError("\(e)")
                     }
 
                 } else {
@@ -170,14 +167,14 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                         let realm = try Realm()
                         realm.add(isUserInDB!)
                     } catch let error { fatalError("\(error)") }
-                    let user = self.query.doQueryToUserInRealm()
+                    let user = QueryToRealm.doQueryToUserInRealm()
                         .filter("userName = '\(isUserInDB!.userName)'").first
                     addRecipeToUser(newResipe: newResipe, isUserInDB: user!).then { user in
-                        jsonConverter.postJSONToServer(user: user)
+                        JSONService.postJSONToServer(user: user)
                         }.then {_ in
                             print("User added to server DB")
                         }.catch { e in
-                            print(e)
+                            fatalError("\(e)")
                     }
 
                 }

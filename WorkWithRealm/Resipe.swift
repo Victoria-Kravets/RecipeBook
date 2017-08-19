@@ -10,14 +10,14 @@ import Foundation
 import RealmSwift
 import UIKit
 import ObjectMapper
-class Resipe: Object, Mappable {
 
-    dynamic var id = 0
-    dynamic var title = ""
-    dynamic var ingredience = ""
-    dynamic var steps = ""
-    dynamic var date: Date!
-    dynamic var image: Data?
+class Resipe: Object, Mappable {
+    @objc dynamic var id = 0
+    @objc dynamic var title = ""
+    @objc dynamic var ingredience = ""
+    @objc dynamic var steps = ""
+    @objc dynamic var date: Date!
+    @objc dynamic var image: Data?
 
     var creater = LinkingObjects(fromType: User.self, property: "resipe")
     func setRecipeImage(_ img: UIImage) {

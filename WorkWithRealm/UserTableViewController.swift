@@ -10,21 +10,18 @@ import UIKit
 import RealmSwift
 class UserTableViewController: UITableViewController {
     var user: User!
-    let query = QueryToRealm()
     var arrayOfChefs = [User]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         var count = 0
-        let users = self.query.doQueryToUserInRealm()
+        let users = QueryToRealm.doQueryToUserInRealm()
         for user in users {
 
             if arrayOfChefs.count != 0 {
-                for chef in arrayOfChefs {
-                    if chef.userName == user.userName {
-                        arrayOfChefs.remove(at: arrayOfChefs.index(of: chef)!)
-                        count -= 1
-                    }
+                for chef in arrayOfChefs where chef.userName == user.userName {
+                    arrayOfChefs.remove(at: arrayOfChefs.index(of: chef)!)
+                    count -= 1
                 }
                 arrayOfChefs.append(user)
                 count += 1
@@ -60,7 +57,7 @@ class UserTableViewController: UITableViewController {
 
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first
+        user = QueryToRealm.doQueryToRecipeInRealm()[indexPath.row].creater.first
         return indexPath
     }
 

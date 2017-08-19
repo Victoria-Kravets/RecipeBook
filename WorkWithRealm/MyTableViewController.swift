@@ -21,7 +21,7 @@ class MyTableViewController: UITableViewController {
     var recipes: Results<Resipe> {
         get {
             if resipes == nil {
-                resipes = self.query.doQueryToRecipeInRealm()
+                resipes = QueryToRealm.doQueryToRecipeInRealm()
             }
             return resipes
         }
@@ -37,17 +37,17 @@ class MyTableViewController: UITableViewController {
         super.viewDidLoad()
         fillRealm()
     }
+
     func fillRealm() {
         do {
             let realm = try Realm()
             try realm.write {
                 realm.deleteAll()
             }
-            let jsonFile = JSONService()
-            jsonFile.getJSONFromServer().then {_ in
+            JSONService.getJSONFromServer().then {_ in
                 self.tableView.reloadData()
                 }.catch { e in
-                    print(e)
+                    fatalError("\(e)")
             }
         } catch let error {
             fatalError("\(error)")
@@ -62,16 +62,16 @@ class MyTableViewController: UITableViewController {
         super.viewWillAppear(true)
        // populateDefaultResipes()
         if chef != nil {
-            recipes = self.query.doQueryToRecipeInRealm().filter("ANY creater.userName = '1'")
+            recipes = QueryToRealm.doQueryToRecipeInRealm().filter("ANY creater.userName = '1'")
         } else {
-            recipes = self.query.doQueryToRecipeInRealm()
+            recipes = QueryToRealm.doQueryToRecipeInRealm()
         }
         tableView.reloadData()
     }
 
     @IBAction func viewAllRecipes(_ sender: UIButton) {
         chef = nil
-        recipes = self.query.doQueryToRecipeInRealm()
+        recipes = QueryToRealm.doQueryToRecipeInRealm()
         tableView.reloadData()
     }
 
@@ -121,9 +121,8 @@ class MyTableViewController: UITableViewController {
                             commit editingStyle: UITableViewCellEditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-
-            let userName = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
-            let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!
+            let userName = QueryToRealm.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
+            let user = QueryToRealm.doQueryToRecipeInRealm()[indexPath.row].creater.first!
             do {
                 let realm = try Realm()
                 try realm.write {
@@ -133,14 +132,13 @@ class MyTableViewController: UITableViewController {
             } catch let error {
                 fatalError("\(error)")
             }
-            let jsonConverter = JSONService()
-            jsonConverter.putJSONToServer(user: user)
-            if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
-                jsonConverter.deleteJSONFromServer(user: user)
+            JSONService.putJSONToServer(user: user)
+            if QueryToRealm.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
+                JSONService.deleteJSONFromServer(user: user)
                 do {
                     let realm = try Realm()
                     try realm.write {
-                        realm.delete(self.query.doQueryToUserInRealm()
+                        realm.delete(QueryToRealm.doQueryToUserInRealm()
                             .filter("userName = '\(userName)'"))
                     }
                 } catch let error {

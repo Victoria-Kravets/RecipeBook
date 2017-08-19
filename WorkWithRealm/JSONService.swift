@@ -14,8 +14,7 @@ import AlamofireObjectMapper
 import PromiseKit
 
 class JSONService {
-    func getJSONFromServer() -> Promise<String> {
-
+    static func getJSONFromServer() -> Promise<String> {
         return Promise<String> { fulfill, _ in
             let url = "http://localhost:3000/users"
             let realm = try Realm()
@@ -38,11 +37,10 @@ class JSONService {
                     }
             }
         }
-
     }
-    @discardableResult func deleteJSONFromServer(user: User) -> Promise<String> {
 
-        return Promise<String> { fulfill, _ in
+    @discardableResult static func deleteJSONFromServer(user: User) -> Promise<String> {
+        return Promise<String> { fulfill, reject in
             let url = "http://localhost:3000/users/\(user.id)"
             let realm = try Realm()
             do {
@@ -54,20 +52,21 @@ class JSONService {
                             headers: nil).validate()
                         .responseJSON { responseJSON in
                             switch responseJSON.result {
-                            case .success( _):
+                            case .success:
                                 _ = responseJSON.result.value
                                 fulfill("Successully deleted")
                             case .failure(let error):
-                                fatalError("\(error)")
+                                reject(error)
                         }
                     }
                 }
             } catch let error {
-                fatalError("\(error)")
+                reject(error)
             }
         }
     }
-    @discardableResult func putJSONToServer(user: User) -> Promise<String> {
+
+    @discardableResult static func putJSONToServer(user: User) -> Promise<String> {
 
         return Promise<String> { fulfill, reject in
             let realm = try Realm()
@@ -96,8 +95,8 @@ class JSONService {
             }
         }
     }
-    @discardableResult func postJSONToServer(user: User) -> Promise<String> {
 
+    @discardableResult static func postJSONToServer(user: User) -> Promise<String> {
         return Promise<String> { fulfill, reject in
             let url = "http://localhost:3000/users"
             let realm = try Realm()

@@ -10,7 +10,7 @@ import Foundation
 import ObjectMapper
 import RealmSwift
 
-class ListTransform<T: RealmSwift.Object where T:Mappable> : TransformType {
+class ListTransform<T: RealmSwift.Object>: TransformType where T:Mappable {
     typealias Object = List<T>
     typealias JSON = [[String:Any]]
 
