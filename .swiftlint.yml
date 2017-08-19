@@ -1,0 +1,7 @@
+excluded:
+- Carthage
+- Pods
+disabled_rules: # rule identifiers to exclude from running
+- identifier_name
+
+

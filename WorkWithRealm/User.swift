@@ -15,16 +15,17 @@ class User: Object, Mappable {
     @objc dynamic var id = 0
     var resipe = List<Resipe>()
     var count = 0
-    @objc dynamic var countOfResipe : Int{
-        get{
+
+    @objc dynamic var countOfResipe: Int {
+        get {
             count = resipe.count
             return count
         }
-        set{
+        set {
            count = newValue
         }
     }
-    convenience init(name: String){
+    convenience init(name: String) {
         self.init()
         self.userName = name
     }
@@ -32,10 +33,10 @@ class User: Object, Mappable {
         self.init()
     }
     func mapping(map: Map) {
-        userName <- map["userName"]
-        id <- map["id"]
-        resipe <- (map["resipe"], ListTransform<Resipe>())
+        userName      <- map["userName"]
+        id            <- map["id"]
+        resipe        <- (map["resipe"], ListTransform<Resipe>())
         countOfResipe <- map["countOfResipe"]
     }
-    
+
 }

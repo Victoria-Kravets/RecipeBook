@@ -9,8 +9,8 @@
 import UIKit
 
 class UserTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var userNameLbl: UILabel!
     @IBOutlet weak var countOfResipe: UILabel!
-   
+
 }
