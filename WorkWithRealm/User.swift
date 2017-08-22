@@ -11,9 +11,9 @@ import RealmSwift
 import ObjectMapper
 
 class User: Object, Mappable {
-    dynamic var userName = ""
-    dynamic var experience = 0
-    dynamic var id = 0
+    @objc dynamic var userName = ""
+    @objc dynamic var experience = 0
+    @objc dynamic var id = 0
     var resipe = List<Resipe>()
     var count = 0
 
