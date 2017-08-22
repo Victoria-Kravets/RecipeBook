@@ -36,6 +36,7 @@ class MyTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Realm.Configuration.defaultConfiguration = RealmMigration().config
         fillRealm()
     }
 
@@ -63,7 +64,7 @@ class MyTableViewController: UITableViewController {
         super.viewWillAppear(true)
        // populateDefaultResipes()
         if chef != nil {
-            recipes = QueryToRealm.doQueryToRecipeInRealm().filter("ANY creater.userName = '1'")
+            recipes = QueryToRealm.doQueryToRecipeInRealm().filter("ANY creater.userName = %@", chef)
         } else {
             recipes = QueryToRealm.doQueryToRecipeInRealm()
         }

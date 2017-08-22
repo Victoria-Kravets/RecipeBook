@@ -36,6 +36,7 @@
 		75B0670E1F2A47A600A7D4E0 /* WorkWithRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0670D1F2A47A600A7D4E0 /* WorkWithRealmTests.swift */; };
 		75B565131F3098C400F0F18F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75B565121F3098C400F0F18F /* .swiftlint.yml */; };
 		75C607AB1F31FAEB00A3FB5D /* QueryToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */; };
+		75FAF4C41F4C4DDE00657CB4 /* RealmMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FAF4C31F4C4DDE00657CB4 /* RealmMigration.swift */; };
 		E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
 		E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
@@ -105,6 +106,7 @@
 		75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		75B565121F3098C400F0F18F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 		75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryToRealm.swift; sourceTree = "<group>"; };
+		75FAF4C31F4C4DDE00657CB4 /* RealmMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMigration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				75B067011F2A47A500A7D4E0 /* LaunchScreen.storyboard */,
 				75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */,
 				75B067041F2A47A600A7D4E0 /* Info.plist */,
+				75FAF4C31F4C4DDE00657CB4 /* RealmMigration.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 			files = (
 				7523CE8C1F2B9C2C005E41C8 /* ResipeTableViewCell.swift in Sources */,
 				75C607AB1F31FAEB00A3FB5D /* QueryToRealm.swift in Sources */,
+				75FAF4C41F4C4DDE00657CB4 /* RealmMigration.swift in Sources */,
 				753813671F2E1147009E86F0 /* UserTableViewController.swift in Sources */,
 				7523CE901F2BA3F7005E41C8 /* CreatingResipeViewController.swift in Sources */,
 				757051C71F2B42B90014B9B2 /* Resipe.swift in Sources */,

@@ -11,8 +11,9 @@ import RealmSwift
 import ObjectMapper
 
 class User: Object, Mappable {
-    @objc dynamic var userName = ""
-    @objc dynamic var id = 0
+    dynamic var userName = ""
+    dynamic var experience = 0
+    dynamic var id = 0
     var resipe = List<Resipe>()
     var count = 0
 
@@ -34,6 +35,7 @@ class User: Object, Mappable {
     }
     func mapping(map: Map) {
         userName      <- map["userName"]
+        
         id            <- map["id"]
         resipe        <- (map["resipe"], ListTransform<Resipe>())
         countOfResipe <- map["countOfResipe"]

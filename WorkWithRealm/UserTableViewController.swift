@@ -11,7 +11,7 @@ import RealmSwift
 class UserTableViewController: UITableViewController {
     var user: User!
     var arrayOfChefs = [User]()
-
+    var chefsWithRecipe = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
         var count = 0
@@ -29,6 +29,7 @@ class UserTableViewController: UITableViewController {
                 arrayOfChefs.append(user)
             }
         }
+        getChefsWithRecipes()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -40,16 +41,22 @@ class UserTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfChefs.count
+        return chefsWithRecipe.count
     }
-
+    func getChefsWithRecipes(){
+        for chef in arrayOfChefs{
+            if chef.countOfResipe > 0{
+                chefsWithRecipe.append(chef)
+            }
+        }
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserTableViewCell {
-            cell.userNameLbl.text = arrayOfChefs[indexPath.row].userName
-            if arrayOfChefs[indexPath.row].countOfResipe == 1 {
-                cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipe"
-            } else if arrayOfChefs[indexPath.row].countOfResipe >= 1 {
-                cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes"
+            cell.userNameLbl.text = chefsWithRecipe[indexPath.row].userName
+            if chefsWithRecipe[indexPath.row].countOfResipe == 1 {
+                cell.countOfResipe.text = String(chefsWithRecipe[indexPath.row].countOfResipe) + " resipe"
+            } else if chefsWithRecipe[indexPath.row].countOfResipe >= 1 {
+                cell.countOfResipe.text = String(chefsWithRecipe[indexPath.row].countOfResipe) + " resipes"
             }
             return cell
         }
@@ -58,6 +65,7 @@ class UserTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         user = QueryToRealm.doQueryToRecipeInRealm()[indexPath.row].creater.first
+        print(user)
         return indexPath
     }
 
