@@ -92,7 +92,7 @@ class DetailViewController: UIViewController {
     func createEditBtn(){
         editButton.layer.cornerRadius = 33
         editButton.setTitle("Edit", for: .normal)
-        editButton.backgroundColor = UIColor(colorLiteralRed: 221/255, green: 221/255, blue: 161/255, alpha: 1)
+        editButton.backgroundColor = UIColor(displayP3Red: 221/255, green: 221/255, blue: 161/255, alpha: 1)
         editButton.snp.makeConstraints{ (make) -> Void in
             make.width.equalTo(66)
             make.height.equalTo(66)
