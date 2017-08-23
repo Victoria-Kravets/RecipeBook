@@ -24,10 +24,8 @@ class JSONService {
                     case .success(let users):
                         do {
                             try realm.write {
-                                for user in users {
-                                    realm.add(user)
-                                    fulfill("Successully filled realm")
-                                }
+                                realm.add(users)
+                                fulfill("Successully filled realm")
                             }
                         } catch let error as NSError {
                             fatalError("\(error)")
