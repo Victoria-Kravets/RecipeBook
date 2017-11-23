@@ -32,7 +32,7 @@ class MyTableViewController: UITableViewController {
     }
     
     var chef: String!
-    var selectedResipe = Resipe()
+    weak var selectedResipe = Resipe()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +159,7 @@ class MyTableViewController: UITableViewController {
                 DetailViewController else {
                     fatalError("Failed to get value for detailController")
             }
-            detailController.recipe = selectedResipe
+            detailController.recipe = selectedResipe!
         }
     }
 }
