@@ -16,7 +16,6 @@
 		7523CE921F2BC7F0005E41C8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */; };
 		7531EDE71F4613C000BF3B97 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531EDE61F4613C000BF3B97 /* SnapKit.framework */; };
 		7531EDE81F4613C000BF3B97 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7531EDE61F4613C000BF3B97 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		753330B61F4DA739001A6C67 /* MapperPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753330B51F4DA739001A6C67 /* MapperPromise.swift */; };
 		753813651F2E0F38009E86F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813641F2E0F38009E86F0 /* User.swift */; };
 		753813671F2E1147009E86F0 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813661F2E1147009E86F0 /* UserTableViewController.swift */; };
 		753813691F2E1156009E86F0 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813681F2E1156009E86F0 /* UserTableViewCell.swift */; };
@@ -82,7 +81,6 @@
 		7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatingResipeViewController.swift; sourceTree = "<group>"; };
 		7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		7531EDE61F4613C000BF3B97 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		753330B51F4DA739001A6C67 /* MapperPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperPromise.swift; sourceTree = "<group>"; };
 		753813641F2E0F38009E86F0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		753813661F2E1147009E86F0 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		753813681F2E1156009E86F0 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewCell.swift; path = ../UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 				75B067011F2A47A500A7D4E0 /* LaunchScreen.storyboard */,
 				75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */,
 				75B067041F2A47A600A7D4E0 /* Info.plist */,
-				753330B51F4DA739001A6C67 /* MapperPromise.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -391,7 +388,6 @@
 				75AA68581F3E14EE00DF45CB /* JSONService.swift in Sources */,
 				75A6CB6B1F448C09001CD524 /* DefaultRecipes.swift in Sources */,
 				7523CE921F2BC7F0005E41C8 /* DetailViewController.swift in Sources */,
-				753330B61F4DA739001A6C67 /* MapperPromise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
